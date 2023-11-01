@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Navbar = () => {
+const Navbar = ({handleDeleteRows}) => {
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     return (
@@ -9,24 +9,22 @@ const Navbar = () => {
         <div className='grid justify-between grid-cols-2'>
         <ul class="items-center hidden lg:flex">
         <li>
-            <a
-            href="/"
-            aria-label="Our product"
-            title="Our product"
+            <p
             class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
             >
             Sletected Item
-            </a>
+            </p>
         </li>
         </ul>
         <ul class="items-center hidden ml-auto lg:flex">
         <li>
-        <a
-            href="/"
-            class="inline-flex items-center justify-center w-full h-10 px-6 font-medium tracking-wide text-gray-900 transition duration-200 rounded shadow-md bg-gray-100 hover:bg-white focus:shadow-outline focus:outline-none" aria-label="Delete Files"
+        <button
+            
+            class="inline-flex items-center justify-center w-full h-10 px-6 font-medium tracking-wide text-gray-900 transition duration-200 rounded shadow-md bg-gray-100 hover:bg-white focus:shadow-outline focus:outline-none"
+            onClick={handleDeleteRows}
             title="Delete Files">
             Delete Files
-        </a>
+        </button>
         </li>
         </ul>
         </div>
@@ -75,24 +73,20 @@ const Navbar = () => {
                 <nav>
                 <ul class="space-y-4">
                     <li>
-                    <a
-                        href="/"
-                        aria-label="Our product"
-                        title="Our product"
+                    <p
                         class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                     >
                         Product
-                    </a>
+                    </p>
                     </li>
                     <li>
-                    <a
-                        href="/"
+                    <button
                         class="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-gray-900 transition duration-200 rounded shadow-md bg-gray-100 hover:bg-white focus:shadow-outline focus:outline-none"
-                        aria-label="Delete Files"
-                        title="Delete Files"
+                        onClick={handleDeleteRows}
+
                     >
                         Delete Files
-                    </a>
+                    </button>
                     </li>
                 </ul>
                 </nav>

@@ -152,8 +152,14 @@ const Gallery = () => {
                  );
                  })
                 .map((arr) => (
-                <div class="row-span-2 rounded-lg shadow-xl border hover:bg-gray-900 inset-0 hover:border-none col-span-2">
-                <img src={arr.img} className='bg-white rounded-lg object-cover hover:opacity-50' alt="" />
+                <div class="relative row-span-2 rounded-lg shadow-xl border hover:bg-gray-900 inset-0 hover:border-none col-span-2">
+                <img src={arr.img} className='bg-white h-full rounded-lg object-cover hover:opacity-50' alt="" />
+                <input
+                className="absolute w-4 h-4 top-3 left-3"
+                type="checkbox"
+                checked={selectedRows.includes(arr.id)}
+                onChange={() => handleRowSelection(arr.id, arr.img)}
+               />
                 </div>
                 ))}
 
@@ -164,8 +170,14 @@ const Gallery = () => {
                  );
                  })
                 .map((arr) => (
-                <div class="col-span-1 rounded-lg shadow-xl border hover:bg-gray-900 inset-0 hover:border-none">
-                <img src={arr.img} className='bg-white rounded-lg object-cover hover:opacity-50' alt="" />
+                <div class="relative col-span-1 rounded-lg shadow-xl border hover:bg-gray-900 inset-0 hover:border-none">
+                <img src={arr.img} className='bg-white rounded-lg h-full object-cover mb-0 hover:opacity-50' alt="" />
+                <input
+                className="absolute w-4 h-4 top-3 left-3"
+                type="checkbox"
+                checked={selectedRows.includes(arr.id)}
+                onChange={() => handleRowSelection(arr.id, arr.img)}
+               />
                 </div>
                 ))}
                 <div class="col-span-1 rounded-lg shadow-xl border hover:bg-gray-900 inset-0 hover:border-none text-center justify-center align-middle px-auto py-auto">

@@ -1,4 +1,4 @@
-# OIGallery - Image Gallery for Ollyo Job Task
+# OIGallery - Image Gallery for Job Task
 
 ### `OIGallery`
 

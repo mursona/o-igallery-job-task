@@ -13,7 +13,7 @@ Description of project:
 * Responsive Image Gallery
 
 ### `Live Demo`
-[![Demo Image Gallery](https://i.ibb.co/bR2GM1j/thumb.png)](https://youtu.be/Stq-TLzoGAU)
+[![Demo Image Gallery](https://i.ibb.co/bR2GM1j/thumb.png)](https://www.youtube.com/watch?v=Stq-TLzoGAU)
 
 ### `Technologies & Packages`
 

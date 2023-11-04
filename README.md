@@ -12,6 +12,9 @@ Description of project:
 * User can set a feature image by sorting.
 * Responsive Image Gallery
 
+### `Live Demo`
+[![Demo Image Gallery](https://i.ibb.co/bR2GM1j/thumb.png)](https://youtu.be/Stq-TLzoGAU)
+
 ### `Technologies & Packages`
 
 * React JS

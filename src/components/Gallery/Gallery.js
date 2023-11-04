@@ -14,6 +14,7 @@ import img8 from '../../assets/images/image-8.webp';
 import img9 from '../../assets/images/image-9.webp';
 import img10 from '../../assets/images/image-10.jpeg';
 import img11 from '../../assets/images/image-11.jpeg';
+import Testorder from './Testorder';
 
 const Gallery = () => {
 
@@ -54,6 +55,39 @@ const Gallery = () => {
       setData(newData);
       setSelectedRows([]);
     };
+
+    const [isDragging, setIsDragging] = useState(false);
+    const [dragIndex, setDragIndex] = useState(-1);
+    const [dragOffset, setDragOffset] = useState(0);
+
+    const startDrag = (index, event) => {
+      setDragIndex(index);
+      event.dataTransfer.effectAllowed = "move";
+      event.dataTransfer.setData("text", index);
+    };
+
+    const onDragOver = (event) => {
+      event.preventDefault();
+      event.dataTransfer.dropEffect = "move";
+    };
+
+    const onDrop = (index, event) => {
+      event.preventDefault();
+      const movedImageIndex = event.dataTransfer.getData("text");
+      if (movedImageIndex !== "") {
+        const fromIndex = parseInt(movedImageIndex);
+        const toIndex = index;
+
+        // Rearrange the images array
+        const movedImage = data[fromIndex];
+        const updatedImages = [...data];
+        updatedImages.splice(fromIndex, 1);
+        updatedImages.splice(toIndex, 0, movedImage);
+        setData(updatedImages);
+      }
+      setDragIndex(-1);
+    };
+
     return (
         <div>
         <div class="px-4 py-2 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 bg-white rounded-t-lg">
@@ -129,35 +163,21 @@ const Gallery = () => {
             )}
             </div>
         </div>   
+        {/* <Testorder></Testorder> */}
             <div className='mx-auto mt-1 sm:max-w-xl md:max-w-full lg:max-w-screen-xl bg-white'>
             <div class="px-4 py-4 md:px-24 lg:px-8 grid grid-rows-3 grid-cols-5 gap-4">
-                {data
-                .filter(data => {
-                 return (
-                 data.id === 1
-                 );
-                 })
-                .map((arr) => (
-                <div class="group relative row-span-2 rounded-lg shadow-xl border hover:bg-gray-900 inset-0 hover:border-none col-span-2">
+                {data.map((arr, index) => (
+                <div 
+                key={index}
+                draggable="true"
+                onDragStart={(event) => startDrag(index, event)}
+                onDragOver={(event) => onDragOver(event)}
+                onDrop={(event) => onDrop(index, event)}
+                className={`${
+                  index === 0 ? "col-span-2 row-span-2" : "col-span-1"
+                  } group relative rounded-lg shadow-xl border hover:bg-gray-900 inset-0 hover:border-none`}
+                >
                 <img src={arr.img} className='bg-white h-full rounded-lg object-cover hover:opacity-50' alt="" />
-                <input
-                className="absolute invisible group-hover:visible w-4 h-4 top-3 left-3"
-                type="checkbox"
-                checked={selectedRows.includes(arr.id)}
-                onChange={() => handleRowSelection(arr.id, arr.img)}
-               />
-                </div>
-                ))}
-
-                {data
-                .filter(data => {
-                 return (
-                 data.id !== 1
-                 );
-                 })
-                .map((arr) => (
-                <div class="group relative col-span-1 rounded-lg shadow-xl border hover:bg-gray-900 inset-0 hover:border-none">
-                <img src={arr.img} className='bg-white rounded-lg h-full object-cover mb-0 hover:opacity-50' alt="" />
                 <input
                 className="absolute invisible group-hover:visible w-4 h-4 top-3 left-3"
                 type="checkbox"

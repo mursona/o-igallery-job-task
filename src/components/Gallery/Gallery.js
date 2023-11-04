@@ -16,8 +16,8 @@ import img8 from '../../assets/images/image-8.webp';
 import img9 from '../../assets/images/image-9.webp';
 import img10 from '../../assets/images/image-10.jpeg';
 import img11 from '../../assets/images/image-11.jpeg';
-import { type } from '@testing-library/user-event/dist/type';
-import { isVisible } from '@testing-library/user-event/dist/utils';
+import logo from '../../assets/images/logo.svg';
+
 
 const Gallery = () => {
 
@@ -104,74 +104,94 @@ const Gallery = () => {
         <div>
         
         {/* start delete and select Navbar */}
-        <div class="px-4 py-2 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 bg-white rounded-t-lg">
+        <div className="px-4 py-2 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 bg-white rounded-t-lg">
             <div className='grid justify-between grid-cols-2'>
-            <ul class="items-center hidden lg:flex">
+            <ul className="items-center hidden lg:flex">
             <li>
-                <p
-                class="flex items-center font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                <div
+                className="flex items-center font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                 >
-                <BsCheckSquareFill className='mr-2 text-blue-600'></BsCheckSquareFill>
-                <span>{selectedRows.length} Files Sletected</span>
-                </p>
+                {
+                  selectedRows.length === 0 ?
+                  <span className='flex items-center text-left'>
+                  <img className='mr-2' src={logo} alt="" />
+                  <p>IMAGE <br /> GALLERY</p>
+                  </span>
+                  :
+                  <span className='flex items-center'>
+                  <BsCheckSquareFill className='ml-3 mr-1 text-blue-600'></BsCheckSquareFill>
+                  <p>{selectedRows.length} Files Sletected</p>
+                  </span>
+                }
+                </div>
             </li>
             </ul>
-            <ul class="items-center hidden ml-auto lg:flex">
+            <ul className="items-center hidden ml-auto lg:flex">
             <li>
             <button
                 
-                class="inline-flex items-center justify-center w-full h-10 px-6 font-medium tracking-wide text-gray-900 transition duration-200 rounded shadow-md bg-gray-100 hover:bg-white focus:shadow-outline focus:outline-none"
+                className="inline-flex items-center justify-center w-full h-10 px-6 font-medium tracking-wide text-gray-700 transition duration-200 rounded shadow-md bg-gray-100 hover:bg-white focus:shadow-outline focus:outline-none"
                 onClick={handleDeleteRows}
                 title="Delete Files">
-                Delete Files
+                {
+                  selectedRows.length === 0 ? 
+                  "Selete Files" : "Delete Files"
+                }
+               
             </button>
             </li>
             </ul>
             </div>
-            <div class="ml-auto lg:hidden">
+            <div className="flex items-center justify-between mx-auto lg:hidden">
+            <img className='w-8 h-5' src={logo} alt="" />
             <button
                 aria-label="Open Menu"
                 title="Open Menu"
-                class="p-2 -mr-1 transition duration-200 rounded focus:outline-none focus:shadow-outline hover:bg-deep-purple-50 focus:bg-deep-purple-50"
+                className="p-2 transition duration-200 rounded focus:outline-none focus:shadow-outline hover:bg-deep-purple-50 focus:bg-deep-purple-50"
                 onClick={() => setIsMenuOpen(true)}
             >
-            <MdMenu></MdMenu>
+            <MdMenu className='text-xl'></MdMenu>
             </button>
             {isMenuOpen && (
-                <div class="absolute top-0 left-0 w-full">
-                <div class="p-5 bg-white border rounded shadow-sm">
-                    <div class="flex items-center justify-between mb-4">
-                    <div>
+                <div className="absolute top-0 left-0 z-index-3 w-full">
+                <div className="p-5 bg-white border rounded shadow-sm">
+                    <div className="flex items-center justify-between mb-4">
                         <button
                         aria-label="Close Menu"
                         title="Close Menu"
-                        class="p-2 -mt-2 -mr-2 transition duration-200 rounded hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                        className="p-2 -mr-2 transition duration-200 rounded hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
                         onClick={() => setIsMenuOpen(false)}
                         >
                         <IoMdClose></IoMdClose>
                         </button>
-                    </div>
-                    </div>
-                    <nav>
-                    <ul class="space-y-4">
+                        <nav>
+                    <ul className="lg:space-y-4 space-y-0 flex items-center justify-between">
                         <li>
                         <p
-                            class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                        className="flex items-center font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                         >
-                            Product
+
+                          <span className='flex items-center'>
+                          <BsCheckSquareFill className='ml-3 mr-1 text-blue-600'></BsCheckSquareFill>
+                          <p>{selectedRows.length} Files Sletected</p>
+                          </span>
+                        
                         </p>
                         </li>
                         <li>
                         <button
-                            class="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-gray-900 transition duration-200 rounded shadow-md bg-gray-100 hover:bg-white focus:shadow-outline focus:outline-none"
+                            className="inline-flex items-center justify-center w-full lg:h-12 h-10 px-6 ml-2 font-medium tracking-wide text-gray-700 transition duration-200 rounded shadow-md bg-gray-100 hover:bg-white focus:shadow-outline focus:outline-none"
                             onClick={handleDeleteRows}
-
-                        >
-                            Delete Files
+                            title="Delete Files">
+                            {
+                              selectedRows.length === 0 ? 
+                              "Selete Files" : "Delete Files"
+                            }
                         </button>
                         </li>
                     </ul>
                     </nav>
+                    </div>
                 </div>
                 </div>
             )}
@@ -180,10 +200,10 @@ const Gallery = () => {
         {/* end delete and select Navbar */} 
 
         {/* start body part */}
-        <div className='mx-auto mt-1 sm:max-w-xl md:max-w-full lg:max-w-screen-xl bg-white'>
+        <div className='mx-auto lg:mt-1 mt-6 sm:max-w-xl md:max-w-full lg:max-w-screen-xl bg-white'>
 
             {/* Start Grid layout for gallery image  */}
-            <div class="px-4 py-4 md:px-24 lg:px-8 grid grid-rows-3 grid-cols-5 gap-4">
+            <div className="px-4 py-4 md:px-24 lg:px-8 grid grid-rows-3 lg:grid-cols-5 md:grid-cols-3 md:grid-rows-2 grid-cols-2 grid rows-2 gap-4">
 
                 {data.map((arr, index) => (
                 <div 
@@ -208,7 +228,7 @@ const Gallery = () => {
 
                 ))}
                 {/* add images card  */}
-                <div class="col-span-1 rounded-lg shadow-xl border hover:bg-gray-900 inset-0 hover:border-none text-center justify-center align-middle px-auto py-auto">
+                <div className="col-span-1 rounded-lg shadow-xl border hover:bg-gray-900 inset-0 hover:border-none text-center justify-center align-middle px-auto py-auto">
                     <div className='my-20' >
                     <BsImages className='text-2xl text-gray-700 mx-auto mb-2'></BsImages>
                    <p>Add Images</p>
